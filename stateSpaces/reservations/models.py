@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
 from django.urls import reverse
 
 
@@ -15,19 +14,19 @@ class Agent(models.Model):
         db_table = 'agent'
 
     def __str__(self):
-        return (self.agent_first_name+self.agent_last_name)
+        return (self.agent_first_name+' '+self.agent_last_name)
 
 
 class AgentBuilding(models.Model):
     agent = models.OneToOneField(Agent, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey('Building', models.DO_NOTHING, related_name='assigned-building')
+    building = models.ForeignKey('Building', models.DO_NOTHING, related_name='agentBuilding')
 
     class Meta:
         managed = False
         db_table = 'agentbuilding'
 
     def __str__(self):
-        return self.agent
+        return str(self.agent)
 
 class Amenity(models.Model):
     amenity_id = models.CharField(primary_key=True, max_length=5)
@@ -45,14 +44,14 @@ class Amenity(models.Model):
 
 class AmenityVenue(models.Model):
     amenity = models.OneToOneField(Amenity, models.DO_NOTHING, primary_key=True)
-    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='assigned-venue')
+    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='amenityVenue')
 
     class Meta:
         managed = False
         db_table = 'amenityvenue'
 
     def __str__(self):
-        return self.amenity
+        return str(self.amenity)
 
 class AvailableVenue(models.Model):
     a_venue = models.OneToOneField('Venue', models.DO_NOTHING, primary_key=True)
@@ -62,7 +61,7 @@ class AvailableVenue(models.Model):
         db_table = 'availablevenue'
 
     def __str__(self):
-        return self.a_venue
+        return str(self.a_venue)
 
 class Building(models.Model):
     building_id = models.CharField(primary_key=True, max_length=5)
@@ -89,7 +88,7 @@ class Customer(models.Model):
         db_table = 'customer'
 
     def __str__(self):
-        return (self.customer_last_name + self.customer_first_name)
+        return (self.customer_last_name + ' ' + self.customer_first_name)
 
 class MemberAssignment(models.Model):
     member_name = models.CharField(primary_key=True, max_length=255)
@@ -127,7 +126,7 @@ class UnavailableVenue(models.Model):
         db_table = 'unavailablevenue'
 
     def __str__(self):
-        return self.u_venue
+        return str(self.u_venue)
 
 class Venue(models.Model):
     venue_id = models.CharField(primary_key=True, max_length=5)
@@ -148,11 +147,11 @@ class Venue(models.Model):
 
 class VenueBuilding(models.Model):
     venue = models.OneToOneField(Venue, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey(Building, models.DO_NOTHING, related_name='building')
+    building = models.ForeignKey(Building, models.DO_NOTHING, related_name='venueBuilding')
 
     class Meta:
         managed = False
         db_table = 'venuebuilding'
 
     def __str__(self):
-        return self.venue
+        return str(self.venue)
