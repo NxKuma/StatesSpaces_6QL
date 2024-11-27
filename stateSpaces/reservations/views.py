@@ -24,10 +24,10 @@ class ReservationDetailView(DetailView):
     template_name = 'reservation_detail.html'
 
 
-class MerchCreateView(CreateView):
+class ReservationCreateView(CreateView):
     model = Reservation
     form_class = ReserveForm
-    template_name = 'reservation-create.html'
+    template_name = 'reservation_create.html'
 
     # def get_form(self, form_class=None):
     #     form = super().get_form(form_class=form_class)

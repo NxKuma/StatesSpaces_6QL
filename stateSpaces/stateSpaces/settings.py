@@ -61,6 +61,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'homepage'),
             os.path.join(BASE_DIR, 'templates', 'registration'),
+            os.path.join(BASE_DIR, 'templates', 'reservations'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -85,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'StateSpaceDB',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'postgress',
         'HOST': 'localhost',
     }
 }

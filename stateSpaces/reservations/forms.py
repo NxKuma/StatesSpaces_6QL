@@ -21,6 +21,7 @@ class ReserveForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Filter venues to only include those in AvailableVenue
-        available_venues = AvailableVenue.objects.values_list('a_venue_id', flat=True)
-        self.fields['venue'].queryset = Venue.objects.filter(id__in=available_venues)
+        available_venues = AvailableVenue.objects.values_list('a_venue', flat=True)
+        self.fields['venue'].queryset = Venue.objects.filter(pk__in=available_venues)
+        self.fields['reservation_id'].disabled = True
 
