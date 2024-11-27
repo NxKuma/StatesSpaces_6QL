@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block page_heading %}
+    Welcome to State Spaces!
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Make a Reservation</button>
+
+<br>
+<br>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">View my Reservations</button>
+
+    {% endblock %}

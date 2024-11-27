@@ -1,0 +1,37 @@
+<!doctype html>
+{% load static %}
+<html lang="en-US">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        {% block styles %}{% endblock %}
+    </head>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% block additional_nav %}{% endblock %}
+        </ul>
+    </nav>
+
+    {% block user_authentication %}
+        {% if request.user.is_authenticated %}
+            <h4> Hello, {{request.user.username}}!</h4>
+            <form action = "{% url 'logout' %}" method = "POST">
+                {% csrf_token %}
+                <button type = "submit">LOG OUT</button>
+            </form>
+        {% else %}
+            <a href ="{% url 'login' %}">Please login.</a>
+        {% endif %}
+    {% endblock %}
+    
+    <h1>{% block page_heading %}{% endblock %}</h1>
+    <h2>{% block page_heading2 %}{% endblock %}</h2>
+
+    <body>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

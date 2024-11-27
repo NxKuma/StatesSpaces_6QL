@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage',
+    'user_management',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,11 @@ ROOT_URLCONF = 'stateSpaces.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'homepage'),
+            os.path.join(BASE_DIR, 'templates', 'registration'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,11 +81,14 @@ WSGI_APPLICATION = 'stateSpaces.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'StateSpaceDB',
-        'USER': 'postgres',
-        'PASSWORD': 'postgress',
-        'HOST': 'localhost',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'StateSpaceDB',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'postgress',
+        # 'HOST': 'localhost',
+
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -120,9 +127,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    ]
+STATIC_URL = '/static/'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/accounts/login'  
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAEMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
