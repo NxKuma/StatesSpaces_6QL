@@ -17,7 +17,7 @@ class Agent(models.Model):
 
 class AgentBuilding(models.Model):
     agent = models.OneToOneField(Agent, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey('Building', models.DO_NOTHING)
+    building = models.ForeignKey('Building', models.DO_NOTHING, related_name='assigned-building')
 
     class Meta:
         managed = False
@@ -42,7 +42,7 @@ class Amenity(models.Model):
 
 class AmenityVenue(models.Model):
     amenity = models.OneToOneField(Amenity, models.DO_NOTHING, primary_key=True)
-    venue = models.ForeignKey('Venue', models.DO_NOTHING)
+    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='assigned-venue')
 
     class Meta:
         managed = False
@@ -90,7 +90,7 @@ class Customer(models.Model):
 
 class MemberAssignment(models.Model):
     member_name = models.CharField(primary_key=True, max_length=255)
-    agent = models.ForeignKey(Agent, models.DO_NOTHING)
+    agent = models.ForeignKey(Agent, models.DO_NOTHING, related_name='member')
 
     class Meta:
         managed = False
@@ -101,8 +101,8 @@ class MemberAssignment(models.Model):
 
 class Reservation(models.Model):
     reservation_id = models.CharField(primary_key=True, max_length=5)
-    customer = models.ForeignKey(Customer, models.DO_NOTHING)
-    venue = models.ForeignKey('Venue', models.DO_NOTHING)
+    customer = models.ForeignKey(Customer, models.DO_NOTHING, related_name='reservation')
+    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='reserved')
     number_of_participants = models.IntegerField()
     date_start = models.DateField()
     date_end = models.DateField()
@@ -133,7 +133,7 @@ class Venue(models.Model):
     capacity = models.IntegerField()
     venue_type = models.CharField(max_length=255)
     floor = models.IntegerField()
-    under_renovation = models.BooleanField(blank=True, null=True)
+    under_renovation = models.BooleanField(blank=False, null=True)
     reservation_fee = models.IntegerField()
 
     class Meta:
@@ -145,7 +145,7 @@ class Venue(models.Model):
 
 class VenueBuilding(models.Model):
     venue = models.OneToOneField(Venue, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey(Building, models.DO_NOTHING)
+    building = models.ForeignKey(Building, models.DO_NOTHING, related_name='building')
 
     class Meta:
         managed = False
