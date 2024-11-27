@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+
 from .models import(Agent, AgentBuilding, Amenity, AmenityVenue, 
                     AvailableVenue, Building, Customer, MemberAssignment,
                     Reservation, UnavailableVenue, Venue, VenueBuilding
@@ -47,6 +48,7 @@ class ReservationAdmin(admin.ModelAdmin):
 class VenueAdmin(admin.ModelAdmin):
     model = Venue
     inlines = [AVInline, AmenityVenueInLine,  VenueBuildingInLine, ReservationInline, ]
+
 
 class AvailableVenueAdmin(admin.ModelAdmin):
     model = AvailableVenue

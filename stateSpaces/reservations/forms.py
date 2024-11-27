@@ -1,3 +1,4 @@
+
 from django import forms
 
 from .models import Reservation, Venue, AvailableVenue
@@ -22,3 +23,4 @@ class ReserveForm(forms.ModelForm):
         # Filter venues to only include those in AvailableVenue
         available_venues = AvailableVenue.objects.values_list('a_venue_id', flat=True)
         self.fields['venue'].queryset = Venue.objects.filter(id__in=available_venues)
+
