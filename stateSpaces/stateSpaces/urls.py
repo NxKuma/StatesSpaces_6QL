@@ -25,5 +25,6 @@ urlpatterns = [
     path('home', HomePageView.as_view(), name='home'),
     path('profile/', include('user_management.urls', namespace = "user_management")),
     path('accounts/', include("django.contrib.auth.urls")),
+    path('reservation/', include('reservations.urls', namespace='reservation')),
     path('admin/', admin.site.urls),
 ]

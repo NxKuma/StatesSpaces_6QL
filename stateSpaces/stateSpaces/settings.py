@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_management',
+    'reservations',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'StateSpaceDB',
         'USER': 'postgres',
-        'PASSWORD': 'postgress',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
     }
 }

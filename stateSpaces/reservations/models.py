@@ -15,12 +15,12 @@ class Agent(models.Model):
         db_table = 'agent'
 
     def __str__(self):
-        return (self.agent_first_name+self.agent_last_name)
+        return (self.agent_first_name+' '+self.agent_last_name)
 
 
 class AgentBuilding(models.Model):
     agent = models.OneToOneField(Agent, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey('Building', models.DO_NOTHING, related_name='assigned-building')
+    building = models.ForeignKey('Building', models.DO_NOTHING, related_name='agentBuilding')
 
     class Meta:
         managed = False
@@ -45,7 +45,7 @@ class Amenity(models.Model):
 
 class AmenityVenue(models.Model):
     amenity = models.OneToOneField(Amenity, models.DO_NOTHING, primary_key=True)
-    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='assigned-venue')
+    venue = models.ForeignKey('Venue', models.DO_NOTHING, related_name='amenityVenue')
 
     class Meta:
         managed = False
@@ -61,7 +61,7 @@ class AvailableVenue(models.Model):
         managed = False
         db_table = 'availablevenue'
 
-    def __str__(self):
+    def __int__(self):
         return self.a_venue
 
 class Building(models.Model):
@@ -148,7 +148,7 @@ class Venue(models.Model):
 
 class VenueBuilding(models.Model):
     venue = models.OneToOneField(Venue, models.DO_NOTHING, primary_key=True)
-    building = models.ForeignKey(Building, models.DO_NOTHING, related_name='building')
+    building = models.ForeignKey(Building, models.DO_NOTHING, related_name='venueBuilding')
 
     class Meta:
         managed = False
