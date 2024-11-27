@@ -8,8 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.shortcuts import redirect
 
-from .models import Product, Transaction
-from .forms import MerchForm, TransactionForm
+from .models import Reservation, Venue
+from .forms import ReserveForm
 from user_management.models import Profile
 
 
@@ -78,16 +78,16 @@ class MerchDetailView(DetailView):
         return self.render_to_response(ctx)
 
 
-class MerchCreateView(LoginRequiredMixin, CreateView):
-    model = Product
-    form_class = MerchForm
-    template_name = 'merchstore_create.html'
+class MerchCreateView(CreateView):
+    model = Reservation
+    form_class = ReserveForm
+    template_name = 'reservation-create.html'
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class=form_class)
-        form.fields['owner'].initial = Profile.objects.get(user=self.request.user)
-        form.fields['owner'].disabled = True
-        return form
+    # def get_form(self, form_class=None):
+    #     form = super().get_form(form_class=form_class)
+    #     form.fields['owner'].initial = Profile.objects.get(user=self.request.user)
+    #     form.fields['owner'].disabled = True
+    #     return form
 
     def get_success_url(self):
         return reverse('merchstore:item', kwargs={'pk': self.object.pk})
