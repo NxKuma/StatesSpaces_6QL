@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
 from django.urls import reverse
 
 
@@ -27,7 +26,7 @@ class AgentBuilding(models.Model):
         db_table = 'agentbuilding'
 
     def __str__(self):
-        return self.agent
+        return str(self.agent)
 
 class Amenity(models.Model):
     amenity_id = models.CharField(primary_key=True, max_length=5)
@@ -52,7 +51,7 @@ class AmenityVenue(models.Model):
         db_table = 'amenityvenue'
 
     def __str__(self):
-        return self.amenity
+        return str(self.amenity)
 
 class AvailableVenue(models.Model):
     a_venue = models.OneToOneField('Venue', models.DO_NOTHING, primary_key=True)
@@ -61,8 +60,8 @@ class AvailableVenue(models.Model):
         managed = False
         db_table = 'availablevenue'
 
-    def __int__(self):
-        return self.a_venue
+    def __str__(self):
+        return str(self.a_venue)
 
 class Building(models.Model):
     building_id = models.CharField(primary_key=True, max_length=5)
@@ -89,7 +88,7 @@ class Customer(models.Model):
         db_table = 'customer'
 
     def __str__(self):
-        return (self.customer_last_name + self.customer_first_name)
+        return (self.customer_last_name + ' ' + self.customer_first_name)
 
 class MemberAssignment(models.Model):
     member_name = models.CharField(primary_key=True, max_length=255)
@@ -127,7 +126,7 @@ class UnavailableVenue(models.Model):
         db_table = 'unavailablevenue'
 
     def __str__(self):
-        return self.u_venue
+        return str(self.u_venue)
 
 class Venue(models.Model):
     venue_id = models.CharField(primary_key=True, max_length=5)
@@ -155,4 +154,4 @@ class VenueBuilding(models.Model):
         db_table = 'venuebuilding'
 
     def __str__(self):
-        return self.venue
+        return str(self.venue)

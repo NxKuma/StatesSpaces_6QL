@@ -9,6 +9,10 @@ from .models import Reservation, Agent
 # from .forms import ReservationForm
 from django.urls import reverse
 
+
+from .models import Reservation, Venue
+from .forms import ReserveForm
+
 from user_management.models import Profile
 
 class ReservationListView(ListView):
@@ -19,10 +23,11 @@ class ReservationDetailView(DetailView):
     model = Reservation
     template_name = 'reservation_detail.html'
 
-class ReservationCreateView(CreateView):
+
+class MerchCreateView(CreateView):
     model = Reservation
-    # form_class = ReservationForm
-    template_name = 'reservation_create.html'
+    form_class = ReserveForm
+    template_name = 'reservation-create.html'
 
     # def get_form(self, form_class=None):
     #     form = super().get_form(form_class=form_class)
