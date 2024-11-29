@@ -18,11 +18,10 @@
 </form>
 
 <br>
-<br>
 
 <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">View my Reservations</button>
+    <a href="{% url 'reservation:list' %}">
+        <button type="button">View My Reservations</button>
+    </a>
 </form>
 {% endblock %}

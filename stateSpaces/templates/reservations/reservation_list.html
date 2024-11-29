@@ -1,13 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}Venue Reservation{% endblock %}
+{% block title %}Your Reservations{% endblock %}
+
+{% block page_heading %}Reservation List{% endblock %}
 
 {% block content %}
-    <h1>Venue Reservation</h1>
-        <h2>Available Venues:</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_div }}
-            <button>Submit</button> 
-        </form>
+<div class="reservation-list">
+    <table>
+        <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Venue</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Participants</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in object_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'reservation:detail' pk=reservation.reservation_id %}">
+                        {{ reservation.reservation_id }}
+                    </a>
+                </td>                <td>{{ reservation.venue }}</td>
+                <td>{{ reservation.date_start }}</td>
+                <td>{{ reservation.date_end }}</td>
+                <td>{{ reservation.number_of_participants }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">You have no reservations.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<a href="{% url 'reservation:create' %}" class="btn btn-success"><button>Create New Reservation</button></a>
+
 {% endblock %}
