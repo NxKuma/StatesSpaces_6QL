@@ -14,14 +14,21 @@ from user_management.models import Profile
 class ReservationListView(ListView):
     model = Reservation
     template_name = 'reservation_list.html'
+    context_object_name = 'reservations'
 
     def get_queryset(self):
-        # Get the logged-in user's profile
         profile = Profile.objects.get(user=self.request.user)
         
-        # Filter reservations associated with the customer's profile
         customer = profile.customer
         return Reservation.objects.filter(customer=customer)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for reservation in context['reservations']:
+            building = reservation.venue.venuebuilding.building
+            agent = building.get_assigned_agent()
+            reservation.agent = agent 
+        return context
 
 class ReservationDetailView(DetailView):
     model = Reservation
@@ -34,8 +41,8 @@ class ReservationDetailView(DetailView):
         return context
 
     def get_object(self):
-        reservation_id = self.kwargs.get('pk')  # Get the reservation_id from the URL
-        return get_object_or_404(Reservation, reservation_id=reservation_id)  # Look up by reservation_id
+        reservation_id = self.kwargs.get('pk')  
+        return get_object_or_404(Reservation, reservation_id=reservation_id) 
     
 class ReservationCreateView(CreateView):
     model = Reservation
@@ -47,11 +54,9 @@ class ReservationCreateView(CreateView):
         profile = Profile.objects.get(user=self.request.user)
         customer = profile.customer
 
-        # Set customer field value and disable it
         form.fields['customer'].initial = customer
         form.fields['customer'].disabled = True
 
-        # Generate a new reservation ID based on the total count of reservations
         existing_reservations = Reservation.objects.count()
         new_reservation_id = f"{existing_reservations + 1:05d}"
         form.fields['reservation_id'].initial = new_reservation_id
@@ -76,11 +81,25 @@ class ReservationCreateView(CreateView):
 
         reservation = form.save()
         messages.success(self.request, f"Your reservation with ID {reservation.reservation_id} has been successfully booked!")
-        return redirect('reservation:detail', pk=reservation.pk)
+        return redirect('reservation:detail', pk=reservation.reservation_id)
 
     def get_success_url(self):
         return reverse('reservation:reservations', kwargs={'pk': self.object.pk})
     
-class AgentListView(ListView):
-    model = Agent
-    template_name = 'agent_list.html'
+class AgentReservationsView(ListView):
+    model = Reservation
+    template_name = 'agent_reservations.html'
+    context_object_name = 'reservations'
+
+    def get_queryset(self):
+        agent_id = self.kwargs['pk']  # Get the agent ID from the URL
+        agent = get_object_or_404(Agent, agent_id=agent_id)
+        # Filter reservations based on venues associated with this agent
+        return Reservation.objects.filter(
+            venue__venuebuilding__building__agentBuilding__agent=agent
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['agent'] = get_object_or_404(Agent, agent_id=self.kwargs['pk'])
+        return context
