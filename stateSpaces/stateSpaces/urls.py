@@ -22,6 +22,7 @@ from django.urls import path, include
 from .views import HomePageView
 
 urlpatterns = [
+    path('', HomePageView.as_view(), name='home'),
     path('home', HomePageView.as_view(), name='home'),
     path('profile/', include('user_management.urls', namespace = "user_management")),
     path('accounts/', include("django.contrib.auth.urls")),
