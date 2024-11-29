@@ -75,6 +75,10 @@ class Building(models.Model):
 
     def __str__(self):
         return self.building_name
+    
+    def get_assigned_agent(self):
+        agent_building = self.agentBuilding.first()
+        return agent_building.agent
 
 class Customer(models.Model):
     customer_id = models.CharField(primary_key=True, max_length=5)

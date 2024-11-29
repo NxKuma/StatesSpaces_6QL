@@ -25,11 +25,7 @@
     <p><strong>End Date:</strong> {{ object.date_end }}</p>
     <p><strong>Type:</strong> {{ object.venue.venue_type }}</p>
     <p><strong>Location:</strong> {{ object.venue.venuebuilding.building }}, {{ object.venue.venuebuilding.building.street }}, {{ object.venue.venuebuilding.building.city }} </p>
-    {% if object.venue.venuebuilding.building.agentbuilding %}
-    <p><strong>Agent:</strong> {{ object.venue.venuebuilding.agentbuilding.agent.agent_first_name }} {{ object.venue.venuebuilding.building.agentbuilding.agent.agent_last_name }}</p>
-{% else %}
-    <p><strong>Agent:</strong> No agent assigned to this building.</p>
-{% endif %}
+    <p><strong>Agent:</strong> {{ object.venue.venuebuilding.building.get_assigned_agent.agent_first_name }} {{ object.venue.venuebuilding.building.get_assigned_agent.agent_last_name }}</p>
 
 <a href="{% url 'reservation:list' %}" class="btn btn-primary"><button>View My Reservations</button></a>
 
