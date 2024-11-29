@@ -14,6 +14,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Participants</th>
+                <th>Assigned Agent</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
                 <td>{{ reservation.date_start }}</td>
                 <td>{{ reservation.date_end }}</td>
                 <td>{{ reservation.number_of_participants }}</td>
+                <td>
+                    <a href="{% url 'reservation:agent_reservations' pk=reservation.agent.agent_id %}">
+                        {{ reservation.agent.agent_first_name }} {{ reservation.agent.agent_last_name }}
+                    </a>
+                </td>                
             </tr>
             {% empty %}
             <tr>
