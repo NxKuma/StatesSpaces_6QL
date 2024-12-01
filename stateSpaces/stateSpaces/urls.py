@@ -24,6 +24,7 @@ from .views import HomePageView
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('home', HomePageView.as_view(), name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', include('user_management.urls', namespace = "user_management")),
     path('accounts/', include("django.contrib.auth.urls")),
     path('reservation/', include('reservations.urls', namespace='reservation')),
