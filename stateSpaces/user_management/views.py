@@ -1,13 +1,13 @@
-# Create your views here.
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, View
 from django.urls import reverse_lazy
 from .models import Profile
-from django.views.generic.edit import FormView
 from django.contrib.auth import login
-from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from reservations.models import Customer
 from .forms import RegistrationForm
+from .models import Profile
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
@@ -21,41 +21,44 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
     
-from django.shortcuts import render, redirect
-from django.views.generic import View
-from django.contrib.auth.models import User
-from django.contrib.auth import login
-from reservations.models import Customer
-from .models import Profile
-from .forms import RegistrationForm
 
 class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
-        return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
     
     def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            # Create a new User object
             user = User.objects.create_user(
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password']
             )
             
-            # Determine the next customer_id
+            # Get the latest customer and determine the next customer_id
             latest_customer = Customer.objects.order_by('-customer_id').first()
             next_id = f"{int(latest_customer.customer_id) + 1:05d}" if latest_customer else "00001"
             
-            # Create the Customer object
+            # Split the display name into first and last name
+            display_name_parts = form.cleaned_data['display_name'].split()
+            
+            # Handle cases where the name is only a single word (either first name or last name)
+            if len(display_name_parts) == 1:
+                customer_last_name = display_name_parts[0]
+                customer_first_name = ''
+            else:
+                customer_last_name = display_name_parts[0]
+                customer_first_name = display_name_parts[-1]
+            
+            # Create the customer
             customer = Customer.objects.create(
                 customer_id=next_id,
-                customer_first_name=form.cleaned_data['display_name'].split()[0],
-                customer_last_name=form.cleaned_data['display_name'].split()[-1],
+                customer_first_name=customer_first_name,
+                customer_last_name=customer_last_name,
                 birth_date=form.cleaned_data['birth_date']
             )
             
-            # Create the Profile and link to the User and Customer
+            # Create the profile
             Profile.objects.create(
                 user=user,
                 customer=customer,
@@ -63,8 +66,7 @@ class RegisterView(View):
                 email_address=form.cleaned_data['email']
             )
             
-            # Log the user in and redirect to home
             login(request, user)
             return redirect('home')
         
-        return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
