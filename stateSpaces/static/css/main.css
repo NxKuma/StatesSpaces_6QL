@@ -4,29 +4,41 @@
     padding: 0;
 }
 
-nav {
+.topnav {
+    overflow: hidden;
     background-color: #000f25; 
     padding: 10px 20px;
 }
 
-nav ul {
+/* nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
+} */
 
+#log {
+    float: right;
+}
+/* 
 nav ul li {
-    display: inline-block;
+    float: right;
     margin-right: 20px;
+} */
+
+li{
+    float: right;
+    color: #fffeff; 
+
 }
 
-nav ul li a {
+a {
+    float: right;
     color: #fffeff; 
     text-decoration: none;
     transition: color 0.3s; 
 }
 
-nav ul li a:hover {
+a:hover {
     color: #ffc107; 
 }
 

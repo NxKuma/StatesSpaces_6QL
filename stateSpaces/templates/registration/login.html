@@ -1,15 +1,21 @@
-<h1>Login</h1>
-<a href="{% url 'password_reset' %}">Forgot password</a>
+{% extends 'base.html' %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
 
-<form method="POST">
-    <p>No account yet?
-    <a href="{% url 'user_management:register' %}">
-       <button type="button">Sign Up!</button>
-    </a></p>
-</form>
+
+{% block content %}
+    <h1>Login</h1>
+    <a href="{% url 'password_reset' %}">Forgot password</a>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+
+    <form method="POST">
+        <p>No account yet?
+        <a href="{% url 'user_management:register' %}">
+        <button type="button">Sign Up!</button>
+        </a></p>
+    </form>
+{% endblock %}

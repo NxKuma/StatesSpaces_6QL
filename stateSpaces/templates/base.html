@@ -3,28 +3,31 @@
 <html lang="en-US">
     <head>
         <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
         {% block styles %}{% endblock %}
     </head>
 
     <nav>
         <ul>
+            <li>State Spaces</li>
             <li><a href="{% url 'home' %}">Home</a></li>
             {% block additional_nav %}{% endblock %}
+            <li id="log">
+                {% block user_authentication %}
+                    {% if request.user.is_authenticated %}
+                        <form action = "{% url 'logout' %}" method = "POST">
+                            {% csrf_token %}
+                            <button type = "submit">Log Out</button>
+                        </form>
+                    {% else %}
+                        <a href ="{% url 'login' %}">Log In</a>
+                    {% endif %}
+                {% endblock %}
+            </li>
         </ul>
     </nav>
 
-    {% block user_authentication %}
-        {% if request.user.is_authenticated %}
-            <h4> Hello, {{request.user.username}}!</h4>
-            <form action = "{% url 'logout' %}" method = "POST">
-                {% csrf_token %}
-                <button type = "submit">LOG OUT</button>
-            </form>
-        {% else %}
-            <a href ="{% url 'login' %}">Please login.</a>
-        {% endif %}
-    {% endblock %}
-    
+
     <h1>{% block page_heading %}{% endblock %}</h1>
     <h2>{% block page_heading2 %}{% endblock %}</h2>
 

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-<h3>Profile Update</h3>
-<a href="{% url 'home' %}">Go Back</a>
-
 {% block content %}
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="SUBMIT">
-</form>
+    <h3>Profile Update</h3>
+    <a href="{% url 'home' %}">Go Back</a>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="SUBMIT">
+    </form>
 {% endblock %}
