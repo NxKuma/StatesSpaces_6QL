@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block page_heading %}
+    Welcome to State Spaces, {{ request.user.username }}!
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'reservation:create' %}" class="btn">Make a Reservation</a>
+</form>
+
+<a href="{% url 'reservation:list' %}" class="btn">View My Reservations</a>
+
+{% endblock %}

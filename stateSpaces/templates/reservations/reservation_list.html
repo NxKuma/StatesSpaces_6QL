@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Reservations{% endblock %}
+
+{% block page_heading %}Reservations{% endblock %}
+
+{% block content %}
+
+    <div class="customer-info">
+        <p><strong>Name:</strong> {{ request.user.profile.customer.customer_last_name }} {{ request.user.profile.customer.customer_first_name }}</p>
+        <p><strong>Birth Date:</strong> {{ request.user.profile.customer.birth_date|date:"F j, Y" }}</p>
+    </div>
+
+    <div class="reservation-list">
+        <table>
+            {% if object_list %}
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Venue</th>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Participants</th>
+                    <th>Assigned Agent</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for reservation in object_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'reservation:detail' pk=reservation.reservation_id %}">
+                            {{ reservation.reservation_id }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'reservation:venue_detail' pk=reservation.venue.venue_id %}">
+                            {{ reservation.venue.venue_name }}
+                        </a>
+                    </td>
+                    <td>{{ reservation.venue.venue_type }}</td>
+                    <td>{{ reservation.venue.venuebuilding.building }}, {{ reservation.venue.venuebuilding.building.street }}, {{ reservation.venue.venuebuilding.building.city }} </td>
+                    <td>{{ reservation.date_start }}</td>
+                    <td>{{ reservation.date_end }}</td>
+                    <td>{{ reservation.number_of_participants }}</td>
+                    <td>
+                        <a href="{% url 'reservation:agent_reservations' pk=reservation.agent.agent_id %}">
+                            {{ reservation.agent.agent_first_name }} {{ reservation.agent.agent_last_name }}
+                        </a>
+                    </td>                
+                </tr>
+                    {% empty %}
+                <tr>
+                    <td colspan="6">You have no reservations.</td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+                {% else %}
+                    <p>You have no reservations to display.</p>
+            {% endif %}
+        </table>
+    </div>
+
+    <a href="{% url 'reservation:create' %}" class="btn">Create New Reservation</a>
+    
+{% endblock %}

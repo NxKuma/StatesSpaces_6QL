@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Venue Detail{% endblock %}
+
+{% block page_heading %}Venue Details: {{ venue.venue_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Venue Information</h2>
+    <ul>
+        <li><strong>Venue ID:</strong> {{ venue.venue_id }}</li>
+        <li><strong>Building:</strong> {{ venue.venuebuilding.building }}</li>
+        <li><strong>Address:</strong> {{ venue.venuebuilding.building.street }}</li>
+        <li><strong>Floor Area:</strong> {{ venue.floor_area }} sq.m</li>
+        <li><strong>Type:</strong> {{ venue.venue_type }}</li>
+        <li><strong>Capacity:</strong> {{ venue.capacity }} people</li>
+        <li><strong>Floor:</strong> {{ venue.floor }}F</li>
+        <li><strong>City:</strong> {{ venue.venuebuilding.building.city }}</li>
+    </ul>
+
+    <hr>
+
+    <div class="reservation-list">
+        <h2>Amenities</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for amenity in amenities %}
+                <tr>
+                    <td>{{ amenity.amenity.amenity_type }}</td>
+                    <td>{{ amenity.amenity.description }}</td>
+                    <td>{{ amenity.amenity.quantity }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No amenities available for this venue.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="action-buttons">
+            <a href="{% url 'reservation:create' %}?venue_id={{ venue.venue_id }}" class="btn">Make Another Reservation</a>
+            <a href="{% url 'reservation:list' %}" class="btn">Back to My Reservations</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
