@@ -9,11 +9,10 @@
     </head>
 
     <body>
-        <!-- Navigation Header -->
         <header>
             <div class="nav-container">
                 <div class="logo">
-                    <a href="{% url 'home' %}">Logo</a> <!-- Adjust the logo link accordingly -->
+                    <a href="{% url 'home' %}">Logo</a>
                 </div>
 
                 {% block user_authentication %}
@@ -21,11 +20,12 @@
                         <div class="user-info">
                             <form action="{% url 'logout' %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn">Logout</button>
+                                <!-- Style the logout link the same as the logo -->
+                                <a href="javascript:void(0);" class="logout-btn" onclick="this.closest('form').submit();">Logout</a>
                             </form>
                         </div>
                     {% else %}
-                        <a href="{% url 'login' %}" class="btn">Login</a>
+                        <a href="{% url 'login' %}" class="logout-btn">Login</a>
                     {% endif %}
                 {% endblock %}
             </div>

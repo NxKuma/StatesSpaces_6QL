@@ -13,7 +13,6 @@ class ReserveForm(forms.ModelForm):
     def is_valid(self):
         valid = super().is_valid()
 
-        # Double Check: Ensure both dates are valid before comparison
         if hasattr(self, 'cleaned_data') and valid:
             start_date = self.cleaned_data.get('date_start')
             end_date = self.cleaned_data.get('date_end')
@@ -22,7 +21,6 @@ class ReserveForm(forms.ModelForm):
                     self.add_error('date_end', 'End date must be greater than start date')
                     valid = False
             else:
-                # If any of the dates are missing, add an error
                 if not start_date:
                     self.add_error('date_start', 'Start date is required')
                 if not end_date:

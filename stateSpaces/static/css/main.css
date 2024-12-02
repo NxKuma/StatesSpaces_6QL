@@ -18,6 +18,12 @@ body {
     font-size: 18px; /* Adjust the font size as needed */
 }
 
+#subtext {
+    font-size: 15px;
+    margin-top: 30px;
+    margin-bottom: -10px;
+}
+
 /* Header Styles */
 header {
     background-color: #4a90e2;
@@ -182,4 +188,27 @@ textarea {
 /* Content Margins */
 #content {
     margin: 0 20px; /* Add side margins to the content */
+}
+
+/* Logo styles */
+.logo a {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Logout button styles */
+.logout-btn {
+    font-size: 24px; /* Same as the logo font size */
+    color: #fff; /* Match the logo color */
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 10px; /* Optional: Add padding to the button */
+}
+
+/* Optional: Add hover effects */
+.logout-btn:hover {
+    color: #ffd700; /* Optional: change color on hover */
 }
