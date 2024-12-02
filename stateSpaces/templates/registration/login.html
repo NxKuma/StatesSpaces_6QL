@@ -9,18 +9,20 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'password_reset' %}">Forgot password</a>
-
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">Login</button>
     </form>
 
+    <a href="{% url 'password_reset' %}" id="subtext">Forgot password?</a>
+
+
     <form method="POST">
-        <p id="subtext">No account yet?</p>
         <a href="{% url 'user_management:register' %}">
-           <button type="button" class="btn">Sign Up!</button>
-        </a>
+            <button type="button" class="btn">Sign Up!</button>
+         </a>
+        <p id="subtext">No account yet?</p>
+        
     </form>
 {% endblock %}

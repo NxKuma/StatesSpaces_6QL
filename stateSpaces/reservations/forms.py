@@ -1,5 +1,6 @@
 from django import forms
 from .models import Reservation, Venue, AvailableVenue
+from django.utils import timezone
 
 class ReserveForm(forms.ModelForm):
     class Meta:
@@ -16,6 +17,16 @@ class ReserveForm(forms.ModelForm):
         if hasattr(self, 'cleaned_data') and valid:
             start_date = self.cleaned_data.get('date_start')
             end_date = self.cleaned_data.get('date_end')
+            current_date = timezone.now().date()
+
+            if start_date and start_date < current_date:
+                self.add_error('date_start', 'Start date cannot be in the past')
+                valid = False
+
+            if end_date and end_date < current_date:
+                self.add_error('date_end', 'End date cannot be in the past')
+                valid = False
+
             if start_date and end_date:
                 if end_date < start_date:
                     self.add_error('date_end', 'End date must be greater than start date')

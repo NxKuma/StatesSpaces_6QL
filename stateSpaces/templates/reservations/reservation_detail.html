@@ -17,18 +17,21 @@
         </ul>
     {% endif %}
     
-    <h3>Reservation ID: {{ object.reservation_id }}</h3>
-    <p><strong>Customer:</strong> {{ object.customer }}</p>
-    <p><strong>Venue:</strong> {{ object.venue }}</p>
-    <p><strong>Number of Participants:</strong> {{ object.number_of_participants }}</p>
-    <p><strong>Start Date:</strong> {{ object.date_start }}</p>
-    <p><strong>End Date:</strong> {{ object.date_end }}</p>
-    <p><strong>Type:</strong> {{ object.venue.venue_type }}</p>
-    <p><strong>Location:</strong> {{ object.venue.venuebuilding.building }}, {{ object.venue.venuebuilding.building.street }}, {{ object.venue.venuebuilding.building.city }} </p>
-    <p><strong>Agent:</strong> {{ object.venue.venuebuilding.building.get_assigned_agent.agent_first_name }} {{ object.venue.venuebuilding.building.get_assigned_agent.agent_last_name }}</p>
+    <div class="container">
 
-    <!-- Use a single <a> tag to style the button, no need for <button> inside it -->
-    <a href="{% url 'reservation:list' %}" class="btn">View My Reservations</a>
-    <a href="{% url 'reservation:create' %}" class="btn">Create New Reservation</a>
+        <h3>Reservation ID: {{ object.reservation_id }}</h3>
+        <p><strong>Customer:</strong> {{ object.customer }}</p>
+        <p><strong>Venue:</strong> {{ object.venue }}</p>
+        <p><strong>Number of Participants:</strong> {{ object.number_of_participants }}</p>
+        <p><strong>Start Date:</strong> {{ object.date_start }}</p>
+        <p><strong>End Date:</strong> {{ object.date_end }}</p>
+        <p><strong>Type:</strong> {{ object.venue.venue_type }}</p>
+        <p><strong>Location:</strong> {{ object.venue.venuebuilding.building }}, {{ object.venue.venuebuilding.building.street }}, {{ object.venue.venuebuilding.building.city }} </p>
+        <p><strong>Agent:</strong> {{ object.venue.venuebuilding.building.get_assigned_agent.agent_first_name }} {{ object.venue.venuebuilding.building.get_assigned_agent.agent_last_name }}</p>
+
+        <a href="{% url 'reservation:list' %}" class="btn">View My Reservations</a>
+        <a href="{% url 'reservation:create' %}" class="btn">Create New Reservation</a>
+        
+    </div>
 
 {% endblock %}

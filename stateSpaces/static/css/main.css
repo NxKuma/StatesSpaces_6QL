@@ -1,10 +1,9 @@
-/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f7fa;
     color: #333;
     margin: 0;
-    padding: 0 20px; /* Added padding for side margins */
+    padding: 0 20px;
 }
 
 .container {
@@ -15,16 +14,14 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-weight: normal;
-    font-size: 18px; /* Adjust the font size as needed */
+    font-size: 18px;
 }
 
 #subtext {
     font-size: 15px;
-    margin-top: 30px;
-    margin-bottom: -10px;
+    margin-top: -10px;
 }
 
-/* Header Styles */
 header {
     background-color: #4a90e2;
     padding: 15px 20px;
@@ -32,11 +29,12 @@ header {
 }
 
 .nav-container {
+    float: le;
     display: flex;
-    justify-content: space-between; /* Ensures space between logo and nav items */
-    align-items: center; /* Vertically aligns logo and nav links */
-    max-width: 100%; /* Make sure it spans the full width */
-    width: 100%; /* Ensure it doesn't shrink */
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    width: 100%; 
 }
 
 .logo a {
@@ -46,8 +44,13 @@ header {
     text-decoration: none;
 }
 
+.logo-pic{
+    height: 50px;
+    width: 80px;
+}
+
 nav {
-    margin-left: auto; /* Pushes the nav links to the right */
+    margin-left: auto;
 }
 
 .nav-links {
@@ -58,7 +61,7 @@ nav {
 }
 
 .nav-links li {
-    margin-left: 20px; /* Space between each nav item */
+    margin-left: 20px;
 }
 
 .nav-links a {
@@ -69,10 +72,9 @@ nav {
 }
 
 .nav-links a:hover {
-    color: #ffd700; /* Highlight color on hover */
+    color: #ffd700;
 }
 
-/* User Authentication Styles */
 .user-info {
     display: flex;
     align-items: center;
@@ -83,7 +85,6 @@ nav {
     margin: 0;
 }
 
-/* Table Styles */
 .reservation-list table {
     width: 100%;
     border-collapse: collapse;
@@ -103,18 +104,8 @@ nav {
     border: 1px solid #ddd;
 }
 
-.reservation-list tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.reservation-list tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-}
-
-/* Button Styles */
 .btn {
-    display: inline-block; /* Make both buttons inline */
+    display: inline-block;
     text-decoration: none;
     font-size: 16px;
     color: #fff;
@@ -135,20 +126,17 @@ form .btn {
     background-color: #357abd;
 }
 
-
-/* Empty Message */
 .reservation-list p {
     font-size: 18px;
     text-align: center;
     color: #666;
 }
 
-/* Form Styles */
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-width: 300px; /* Limit form width */
+    max-width: 300px;
     margin: 0;
 }
 
@@ -163,7 +151,7 @@ input[type="password"],
 input[type="date"], 
 select, 
 textarea {
-    width: 100%; /* Keep input fields relative to form width */
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -185,12 +173,10 @@ textarea {
     min-height: 100px;
 }
 
-/* Content Margins */
 #content {
-    margin: 0 20px; /* Add side margins to the content */
+    margin: 0 20px;
 }
 
-/* Logo styles */
 .logo a {
     font-size: 24px;
     color: #fff;
@@ -198,17 +184,15 @@ textarea {
     text-decoration: none;
 }
 
-/* Logout button styles */
 .logout-btn {
-    font-size: 24px; /* Same as the logo font size */
-    color: #fff; /* Match the logo color */
+    font-size: 24px; 
+    color: #fff;
     font-weight: bold;
-    text-decoration: none; /* Remove underline */
-    cursor: pointer; /* Change cursor to pointer */
-    padding: 10px; /* Optional: Add padding to the button */
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
 }
 
-/* Optional: Add hover effects */
 .logout-btn:hover {
-    color: #ffd700; /* Optional: change color on hover */
+    color: #ffd700;
 }

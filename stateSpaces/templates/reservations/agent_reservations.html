@@ -21,6 +21,7 @@
                 <th>Under renovation?</th>
             </tr>
         </thead>
+        
         <tbody>
             {% for reservation in reservations %}
             <tr>
@@ -43,11 +44,10 @@
         </tbody>
     </table>
     {% else %}
-    <p>This agent has no reservations.</p>
+        <p>This agent has no reservations.</p>
     {% endif %}
 </div>
-<br>
-<!-- Removed the <button> tag inside the <a> -->
-<a href="{% url 'reservation:list' %}" class="btn btn-primary">Back to My Reservations</a>
+
+<a href="{% url 'reservation:list' %}" class="btn">Back to My Reservations</a>
 
 {% endblock %}

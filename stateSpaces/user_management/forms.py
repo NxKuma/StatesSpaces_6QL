@@ -5,4 +5,4 @@ class RegistrationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     display_name = forms.CharField(max_length=255)
     email = forms.EmailField()
-    birth_date = forms.DateField(widget=forms.SelectDateWidget)
+    birth_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))

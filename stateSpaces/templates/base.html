@@ -1,8 +1,9 @@
 <!doctype html>
 {% load static %}
-
 <html lang="en-US">
-    <head>
+
+<link rel="shortcut icon" type="image/png" href="{% static 'CSCI41.png' %}" >
+<head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
         {% block styles %}{% endblock %}
@@ -12,7 +13,10 @@
         <header>
             <div class="nav-container">
                 <div class="logo">
-                    <a href="{% url 'home' %}">Logo</a>
+                    <img src="{% static 'CSCI41.png' %}?v=1.0" alt="Logo Pic" style="float:right;height:70px;width:90px;">
+                </div>
+                <div class="logo">
+                    <a href="{% url 'home' %}">StateSpaces</a>
                 </div>
 
                 {% block user_authentication %}
@@ -20,7 +24,6 @@
                         <div class="user-info">
                             <form action="{% url 'logout' %}" method="POST">
                                 {% csrf_token %}
-                                <!-- Style the logout link the same as the logo -->
                                 <a href="javascript:void(0);" class="logout-btn" onclick="this.closest('form').submit();">Logout</a>
                             </form>
                         </div>
