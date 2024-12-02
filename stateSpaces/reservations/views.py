@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
-from .models import Reservation, Agent
+from .models import Reservation, Agent, Venue
 from .forms import ReserveForm
 
 from user_management.models import Profile
@@ -102,4 +102,21 @@ class AgentReservationsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['agent'] = get_object_or_404(Agent, agent_id=self.kwargs['pk'])
+        return context
+    
+class VenueDetailView(DetailView):
+    model = Venue
+    template_name = 'venue_detail.html'
+    context_object_name = 'venue'
+
+    def get_object(self):
+        venue_id = self.kwargs.get('pk')  # Get the venue ID from the URL
+        return get_object_or_404(Venue, pk=venue_id)  # Retrieve the venue object using its primary key
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        venue = context['venue']
+        # Access the amenities related to this venue
+        amenities = venue.amenityVenue.all()  # This uses the reverse relationship
+        context['amenities'] = amenities
         return context

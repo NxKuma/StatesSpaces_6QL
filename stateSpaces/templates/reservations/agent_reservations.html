@@ -5,29 +5,39 @@
 {% block page_heading %}Reservations Handled by {{ agent.agent_first_name }} {{ agent.agent_last_name }}{% endblock %}
 
 {% block content %}
-<div class="agent-reservations-list">
+<div class="reservation-list">
     {% if reservations %}
     <h3>Reservations Information</h3>
     <table>
         <thead>
             <tr>
                 <th>Reservation ID</th>
-                <th>Customer</th>
                 <th>Venue</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Participants</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Floor Area</th>
+                <th>Capacity</th>
+                <th>Amenities</th>
+                <th>Under renovation?</th>
             </tr>
         </thead>
         <tbody>
             {% for reservation in reservations %}
             <tr>
                 <td><a href="{% url 'reservation:detail' pk=reservation.reservation_id %}">{{ reservation.reservation_id }}</a></td>
-                <td>{{ reservation.customer }}</td>
                 <td>{{ reservation.venue }}</td>
-                <td>{{ reservation.date_start }}</td>
-                <td>{{ reservation.date_end }}</td>
-                <td>{{ reservation.number_of_participants }}</td>
+                <td>{{ reservation.venue.venue_type }}</td>
+                <td>{{ reservation.venue.venuebuilding.building }}, {{ reservation.venue.venuebuilding.building.street }}, {{ reservation.venue.venuebuilding.building.city }}</td>
+                <td>{{ reservation.venue.floor_area }}</td>
+                <td>{{ reservation.venue.capacity }}</td>
+                <td>
+                    {% for amenity in reservation.venue.amenityVenue.all %}
+                        {{amenity.amenity.quantity}} {{ amenity.amenity.amenity_type }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No amenities available
+                    {% endfor %}
+                </td>
+                <td>{{ reservation.venue.under_renovation|yesno:"Yes,No" }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -37,6 +47,7 @@
     {% endif %}
 </div>
 <br>
-<a href="{% url 'reservation:list' %}" class="btn btn-primary"><button>Back to My Reservations</button></a>
+<!-- Removed the <button> tag inside the <a> -->
+<a href="{% url 'reservation:list' %}" class="btn btn-primary">Back to My Reservations</a>
 
 {% endblock %}

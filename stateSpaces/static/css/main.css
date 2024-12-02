@@ -1,58 +1,185 @@
-* {
-    box-sizing: border-box;
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
     margin: 0;
-    padding: 0;
+    padding: 0 20px; /* Added padding for side margins */
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-weight: normal;
+    font-size: 18px; /* Adjust the font size as needed */
+}
+
+/* Header Styles */
+header {
+    background-color: #4a90e2;
+    padding: 15px 20px;
+    color: #fff;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between; /* Ensures space between logo and nav items */
+    align-items: center; /* Vertically aligns logo and nav links */
+    max-width: 100%; /* Make sure it spans the full width */
+    width: 100%; /* Ensure it doesn't shrink */
+}
+
+.logo a {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 nav {
-    background-color: #000f25; 
-    padding: 10px 20px;
+    margin-left: auto; /* Pushes the nav links to the right */
 }
 
-nav ul {
+.nav-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
 }
 
-nav ul li {
-    display: inline-block;
-    margin-right: 20px;
+.nav-links li {
+    margin-left: 20px; /* Space between each nav item */
 }
 
-nav ul li a {
-    color: #fffeff; 
+.nav-links a {
+    color: #fff;
     text-decoration: none;
-    transition: color 0.3s; 
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #ffc107; 
+.nav-links a:hover {
+    color: #ffd700; /* Highlight color on hover */
 }
 
-#user-authentication {
-    margin-top: 20px;
-    padding-left: 20px;
+/* User Authentication Styles */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-h1, h2 {
-    margin-top: 20px;
-    margin-left: 10px; 
-    font-family: 'Playfair Display', serif; 
+.user-info h4 {
+    margin: 0;
 }
 
-h2 {
-    margin-top: 2px;
-    margin-left: 0px;
-    font-size: 1.5em;
+/* Table Styles */
+.reservation-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
 }
 
+.reservation-list thead {
+    background-color: #4a90e2;
+    color: #fff;
+    text-align: left;
+}
+
+.reservation-list th, 
+.reservation-list td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.reservation-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.reservation-list tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block; /* Make both buttons inline */
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4a90e2;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+form .btn {
+    width: 56%; 
+}
+
+.btn:hover {
+    background-color: #357abd;
+}
+
+
+/* Empty Message */
+.reservation-list p {
+    font-size: 18px;
+    text-align: center;
+    color: #666;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px; /* Limit form width */
+    margin: 0;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="date"], 
+select, 
+textarea {
+    width: 100%; /* Keep input fields relative to form width */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Content Margins */
 #content {
-    padding: 20px;
-    border-radius: 8px; 
-    margin: 20px;
-}
-
-body {
-    background-color: #bacfd3; 
+    margin: 0 20px; /* Add side margins to the content */
 }

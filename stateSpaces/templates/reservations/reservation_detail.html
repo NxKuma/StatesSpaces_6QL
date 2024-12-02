@@ -27,9 +27,8 @@
     <p><strong>Location:</strong> {{ object.venue.venuebuilding.building }}, {{ object.venue.venuebuilding.building.street }}, {{ object.venue.venuebuilding.building.city }} </p>
     <p><strong>Agent:</strong> {{ object.venue.venuebuilding.building.get_assigned_agent.agent_first_name }} {{ object.venue.venuebuilding.building.get_assigned_agent.agent_last_name }}</p>
 
-<a href="{% url 'reservation:list' %}" class="btn btn-primary"><button>View My Reservations</button></a>
-
-<!-- Button to create a new reservation -->
-<a href="{% url 'reservation:create' %}" class="btn btn-success"><button>Create New Reservation</button></a>
+    <!-- Use a single <a> tag to style the button, no need for <button> inside it -->
+    <a href="{% url 'reservation:list' %}" class="btn">View My Reservations</a>
+    <a href="{% url 'reservation:create' %}" class="btn">Create New Reservation</a>
 
 {% endblock %}
